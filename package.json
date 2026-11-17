@@ -1,0 +1,13 @@
+{
+  "name": "emby-proxy-vps",
+  "version": "2.3.0",
+  "description": "Emby 反代管理面板 VPS 版（零依赖 Node.js）",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {}
+}
