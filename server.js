@@ -64,7 +64,12 @@ let config = loadJSON(CONFIG_FILE, {});
 let routes = loadJSON(ROUTES_FILE, []);
 let stats = loadJSON(STATS_FILE, {});
 if (!config.ipguard || typeof config.ipguard !== 'object') config.ipguard = { mode: 'off', ips: [], countries: [], redirect: '' };
-if (!Array.isArray(config.ipguardTrusted)) config.ipguardTrusted = [];
+
+// Koyeb/云平台环境变量覆盖（容器文件系统不持久，密钥从 env 注入）
+if (process.env.ADMIN_TOKEN && process.env.ADMIN_TOKEN !== config.adminToken) {
+  config.adminToken = process.env.ADMIN_TOKEN;
+  persistConfig();
+}
 
 const persistConfig = () => saveJSON(CONFIG_FILE, config);
 const persistRoutes = () => saveJSON(ROUTES_FILE, routes);
