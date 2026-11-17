@@ -1,0 +1,23 @@
+name: emby-proxy-vps
+services:
+  - name: emby-proxy
+    type: web
+    runtime: node
+    build:
+      builder: nativepack
+    ports:
+      - port: 3333
+        protocol: http
+    env:
+      PORT: "3333"
+    healthcheck:
+      path: /
+      port: 3333
+    regions:
+      - fra
+      - sin
+      - us-east
+    instances: 1
+    scaling:
+      min: 1
+      max: 1
